@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10131f">
+  <meta name="description" content="A clean, responsive task manager built with HTML, CSS and vanilla JavaScript.">
+  <title>TM Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="TM Task Manager home">
+        <span class="brand-mark">TM</span>
+        <span>Task Manager<small>MAKE SPACE FOR WHAT MATTERS</small></span>
+      </a>
+      <span class="local-badge"><span></span> Saved on this device</span>
+    </header>
+
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+        <h1>Make today <span>count.</span></h1>
+        <p class="subtitle">One task at a time. Keep your focus, build momentum.</p>
+      </div>
+      <div class="date-card">
+        <span class="date-icon" aria-hidden="true">◷</span>
+        <div><strong id="today-date">Today</strong><small>YOUR DAILY PLAN</small></div>
+      </div>
+    </section>
+
+    <section class="overview" aria-label="Task overview">
+      <article class="stat-card">
+        <div class="stat-top"><span>Total tasks</span><span class="stat-icon purple">▤</span></div>
+        <strong id="total-count">0</strong><small>Tasks in your workspace</small>
+      </article>
+      <article class="stat-card">
+        <div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div>
+        <strong id="completed-count">0</strong><small>Tasks you've finished</small>
+      </article>
+      <article class="stat-card">
+        <div class="stat-top"><span>In progress</span><span class="stat-icon orange">↗</span></div>
+        <strong id="pending-count">0</strong><small>Still waiting for you</small>
+      </article>
+      <article class="stat-card progress-card">
+        <div class="stat-top"><span>Daily progress</span><span id="progress-percent">0%</span></div>
+        <div class="progress-track"><div id="progress-fill"></div></div>
+        <small id="progress-caption">Start with one small win.</small>
+      </article>
+    </section>
+
+    <section class="workspace">
+      <div class="section-heading">
+        <div><p class="eyebrow">STAY ORGANIZED</p><h2>Your tasks</h2></div>
+        <span id="visible-count" class="task-count">0 tasks</span>
+      </div>
+
+      <form id="task-form" class="task-form">
+        <label class="sr-only" for="task-input">Task title</label>
+        <span class="input-icon" aria-hidden="true">＋</span>
+        <input id="task-input" type="text" maxlength="120" placeholder="What do you need to get done?" autocomplete="off" required>
+        <select id="task-priority" aria-label="Task priority">
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="low">Low</option>
+        </select>
+        <button class="primary-btn" type="submit"><span>＋</span> Add task</button>
+      </form>
+      <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter-btn active" type="button" data-filter="all">All <span id="all-filter-count">0</span></button>
+          <button class="filter-btn" type="button" data-filter="pending">Pending <span id="pending-filter-count">0</span></button>
+          <button class="filter-btn" type="button" data-filter="completed">Completed <span id="completed-filter-count">0</span></button>
+        </div>
+        <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search tasks</span><input id="search-input" type="search" placeholder="Search tasks..."></label>
+      </div>
+
+      <div id="task-list" class="task-list" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state">
+        <div class="empty-illustration" aria-hidden="true">✓</div>
+        <h3 id="empty-title">A fresh start</h3>
+        <p id="empty-description">Add your first task above and turn your plans into progress.</p>
+      </div>
+      <footer class="list-footer"><span>Small steps lead to big results.</span><button id="clear-completed" class="text-btn" type="button">Clear completed</button></footer>
+    </section>
+    <footer class="app-footer">Built with <span>♥</span> by <strong>TM Studio</strong> <span class="footer-dot">•</span> HTML · CSS · JavaScript</footer>
+  </main>
+
+  <dialog id="edit-dialog" class="edit-dialog">
+    <form id="edit-form" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow">UPDATE TASK</p><h2>Edit task</h2></div><button type="button" id="close-dialog" class="icon-btn" aria-label="Close edit dialog">×</button></div>
+      <label for="edit-input">Task title</label>
+      <input id="edit-input" maxlength="120" required>
+      <label for="edit-priority">Priority</label>
+      <select id="edit-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+      <div class="dialog-actions"><button type="button" id="cancel-edit" class="secondary-btn">Cancel</button><button type="submit" class="primary-btn">Save changes</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
